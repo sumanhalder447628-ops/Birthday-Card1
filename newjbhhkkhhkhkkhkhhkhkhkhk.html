@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <!-- Load Tailwind CSS via CDN for easy and modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Styles for a festive look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0e3ff, #e0f7fa); /* Soft, festive background */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Use a playful font for the main heading */
+        #greeting {
+            font-family: 'Pacifico', cursive;
+            color: #ff69b4; /* Hot Pink */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Style the hidden message container for the reveal effect */
+        #secret-message {
+            transition: opacity 1s ease-in-out, transform 0.8s ease-out;
+            opacity: 0; /* Starts invisible */
+            transform: translateY(20px);
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        /* Style for the card when it is 'open' */
+        .card.open #secret-message {
+            opacity: 1; /* Becomes visible */
+            transform: translateY(0);
+            max-height: 500px; /* Allows content to be visible */
+            margin-top: 24px;
+        }
+        
+        /* Animation for the confetti button */
+        @keyframes pulse-pop {
+            0% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
+            50% { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgba(255, 105, 180, 0.5), 0 4px 6px -4px rgba(255, 105, 180, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
+        }
+
+        .confetti-button:hover {
+            animation: pulse-pop 0.5s ease-in-out;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- The main card container -->
+    <div id="birthday-card" class="card bg-white p-6 sm:p-10 shadow-2xl rounded-xl max-w-lg w-full transform transition duration-500 hover:scale-[1.02]">
+        
+        <!-- Main Greeting -->
+        <h1 id="greeting" class="text-5xl sm:text-6xl text-center mb-6 font-extrabold select-none">
+            Happy Birthday!
+        </h1>
+
+        <!-- Recipient Name - You can easily change this! -->
+        <h2 class="text-2xl text-center text-gray-700 mb-8">
+            To My Didi ❤️🤭
+        </h2>
+
+        <!-- Initial Teaser Message -->
+        <p class="text-lg text-center text-gray-600 mb-8">
+            This card holds a special wish just for you. Click the button below to open it!
+        </p>
+
+        <!-- Button to trigger the message reveal -->
+        <div class="text-center">
+            <button id="open-button" class="confetti-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 text-xl tracking-wider">
+                🎉 Open Your Card 🎉
+            </button>
+        </div>
+
+        <!-- Secret Message Area (Initially Hidden) -->
+        <div id="secret-message">
+            <div class="border-t-2 border-dashed border-pink-300 pt-6">
+                <!-- The Core Wish Message - Customize this part! -->
+                <p class="text-xl text-gray-800 leading-relaxed italic text-center">
+
+Dear Didi,Happy Birthday! 💖🎉
+Today is your special day, and I want to send you lots of love and warm wishes. From childhood till now, you have always been by my side — sometimes as a friend, sometimes as a guardian. Your love, courage, and support give me strength every single day.
+May every day of your life be filled with happiness and success. May all your dreams come true, and may that beautiful smile of yours never fade. I pray that God always keeps you healthy, safe, and happy.
+You are not just my sister, you are my greatest strength.💗
+Once again—Happy Birthday, Didi!🎂✨
+
+                </p>
+                
+                <!-- Sign-off -->
+                <p class="text-lg text-right mt-6 font-semibold text-pink-500">
+                    .
+                </p>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- JavaScript for the Interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Find the elements we need to interact with
+            const openButton = document.getElementById('open-button');
+            const birthdayCard = document.getElementById('birthday-card');
+            
+            // Check if essential elements exist before proceeding
+            if (!openButton || !birthdayCard) {
+                console.error("Initialization failed: One or more required DOM elements could not be found.");
+                return; 
+            }
+            
+            // Function to handle the card opening logic
+            function openCard() {
+                // 1. Reveal the message
+                birthdayCard.classList.add('open');
+                
+                // 2. Change the button text and disable it
+                openButton.textContent = '🥳 Happy Birthday! 🥳';
+                openButton.disabled = true;
+                openButton.classList.remove('hover:bg-pink-600', 'hover:-translate-y-1');
+                openButton.classList.add('bg-pink-400', 'cursor-default');
+            }
+
+            // Add listeners
+            openButton.addEventListener('click', openCard);
+        });
+        
+        // --- HOW TO CUSTOMIZE ---
+        // 1. To change the recipient, change "[Recipient's Name]" on line 88.
+        // 2. To change the sender, change "[Your Name]" on line 101.
+        // 3. To change the main wish, edit the text inside the <p> tags on lines 97-99.
+        // 4. Remember to host this file online to share the URL!
+    </script>
+</body>
+</html>
